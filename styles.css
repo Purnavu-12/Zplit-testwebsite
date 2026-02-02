@@ -303,75 +303,159 @@ body {
 }
 
 .screen-content {
-    padding: 20px;
+    padding: 16px;
 }
 
 .mock-app {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
 .mock-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border-color);
+    gap: 10px;
+    padding: 12px 0;
 }
 
-.mock-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--gradient-primary);
+.mock-logo {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
 }
 
 .mock-title {
     font-weight: 700;
     font-size: 1.1rem;
+    flex: 1;
+}
+
+.mock-menu {
+    width: 20px;
+    height: 20px;
+    color: var(--text-secondary);
+}
+
+.mock-menu svg {
+    width: 100%;
+    height: 100%;
+}
+
+.mock-balance {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    padding: 16px;
+    border-radius: var(--radius-lg);
+    color: white;
+    text-align: center;
+}
+
+.balance-label {
+    font-size: 0.75rem;
+    opacity: 0.9;
+    margin-bottom: 4px;
+}
+
+.balance-amount {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.balance-status {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.7rem;
+    opacity: 0.9;
+    gap: 8px;
+}
+
+.status-owe, .status-owed {
+    flex: 1;
+    text-align: center;
+}
+
+.mock-section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    padding: 4px 0;
+}
+
+.mock-section-title svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-green);
 }
 
 .mock-cards {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .mock-card {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
-    padding: 16px;
+    padding: 12px;
     background: var(--bg-secondary);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     transition: transform 0.3s ease;
 }
 
 .mock-card:hover {
-    transform: translateX(5px);
+    transform: translateX(3px);
 }
 
 .card-icon {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--radius-md);
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-icon svg {
+    width: 24px;
+    height: 24px;
 }
 
 .card-info {
     flex: 1;
+    min-width: 0;
 }
 
 .card-title {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+    color: var(--text-primary);
+}
+
+.card-subtitle {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
     margin-bottom: 4px;
 }
 
 .card-amount {
-    font-size: 1.2rem;
+    font-size: 0.85rem;
     font-weight: 700;
+    color: #dc2626;
+}
+
+.card-amount.settled {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.card-amount.positive {
     color: var(--primary-green);
 }
 
@@ -402,11 +486,10 @@ body {
     animation-delay: 2s;
 }
 
-.card-icon-small {
+.floating-icon {
     width: 24px;
     height: 24px;
-    border-radius: 6px;
-    background: var(--gradient-primary);
+    color: var(--primary-green);
 }
 
 /* Hero Background */
