@@ -14,16 +14,48 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar scroll effect
+// Combined scroll effect with throttling
 const navbar = document.querySelector('.navbar');
+let ticking = false;
 
-window.addEventListener('scroll', () => {
+function updateOnScroll() {
     const currentScroll = window.pageYOffset;
     
+    // Navbar shadow effect
     if (currentScroll > 50) {
         navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
     } else {
         navbar.style.boxShadow = 'none';
+    }
+    
+    // Active state for navigation links
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (currentScroll >= sectionTop - 100) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+    
+    ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            updateOnScroll();
+        });
+        ticking = true;
     }
 });
 
@@ -53,43 +85,6 @@ if (aboutSection) {
     observer.observe(aboutSection);
 }
 
-// Add hover effect to download buttons
-document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-2px)';
-    });
-    
-    button.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-    });
-});
-
-// Log page load
-console.log('Zplit website loaded successfully!');
-console.log('Welcome to Zplit - Decentralized Payment Splitting Made Easy');
-
-// Add active state to navigation links based on scroll position
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (window.pageYOffset >= sectionTop - 100) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
-
 // Animate stats on scroll
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -106,3 +101,7 @@ document.querySelectorAll('.stat').forEach(stat => {
     stat.style.transition = 'all 0.6s ease';
     statsObserver.observe(stat);
 });
+
+// Log page load
+console.log('Zplit website loaded successfully!');
+console.log('Welcome to Zplit - Decentralized Payment Splitting Made Easy');
